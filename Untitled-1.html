@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growing Rose Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #8e44ad, #3498db);
+            overflow: hidden;
+            animation: sunriseBackground 6s ease-in-out forwards;
+        }
+
+        @keyframes sunriseBackground {
+            0% {
+                background: linear-gradient(to bottom, #2c3e50, #34495e);
+            }
+            100% {
+                background: linear-gradient(to bottom, #ff8c00, #ff4500);
+            }
+        }
+
+        .scene {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: #2c3e50;
+            border-top-left-radius: 50% 40px;
+            border-top-right-radius: 50% 40px;
+            z-index: 1;
+        }
+
+        /* Sunrise Animation */
+        .sunrise {
+            position: absolute;
+            top: 50px; /* Move sun to top left */
+            left: 50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff8c00, #ff4500);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: riseSun 6s ease-in-out forwards;
+        }
+
+        @keyframes riseSun {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+            100% {
+                top: 50px;
+                opacity: 1;
+            }
+        }
+
+        /* Cloud Animation */
+        .cloud {
+            position: absolute;
+            top: 50px;
+            width: 150px;
+            height: 80px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            animation: moveClouds 10s linear infinite;
+        }
+
+        .cloud:nth-child(1) {
+            left: 10%;
+            animation-duration: 12s;
+        }
+
+        .cloud:nth-child(2) {
+            left: 50%;
+            animation-duration: 15s;
+        }
+
+        .cloud:nth-child(3) {
+            left: 80%;
+            animation-duration: 18s;
+        }
+
+        @keyframes moveClouds {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* River Animation */
+        .river {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            z-index: 0;
+            animation: flowRiver 6s linear infinite;
+        }
+
+        @keyframes flowRiver {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        .seed {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #6e2c00;
+            border-radius: 50%;
+            animation: growSeed 2s forwards;
+        }
+
+        @keyframes growSeed {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .flower {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            animation: growFlower 8s forwards ease-in-out;
+        }
+
+        @keyframes growFlower {
+            0% {
+                transform: translateX(-50%) scale(0);
+            }
+            20% {
+                transform: translateX(-50%) scale(0.5);
+            }
+            50% {
+                transform: translateX(-50%) scale(0.8);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        .stem {
+            width: 10px;
+            height: 0;
+            background: #145a32;
+            border-radius: 5px;
+            position: relative;
+            animation: growStem 4s forwards;
+        }
+
+        @keyframes growStem {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 200px;
+            }
+        }
+
+        .leaves {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            width: 50px;
+            opacity: 0;
+            animation: growLeaves 6s forwards;
+        }
+
+        @keyframes growLeaves {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .leaf {
+            width: 30px;
+            height: 15px;
+            background: #27ae60;
+            border-radius: 50px 50px 0 50px;
+        }
+
+        .leaf.left {
+            transform: rotate(-30deg);
+            position: absolute;
+            left: -15px;
+        }
+
+        .leaf.right {
+            transform: rotate(30deg);
+            position: absolute;
+            right: -15px;
+        }
+
+        .petals {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: bloom 8s forwards ease-in-out;
+        }
+
+        @keyframes bloom {
+            0%, 50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .petal {
+            width: 60px;
+            height: 100px;
+            background: radial-gradient(circle, #ffffff, #f7f7f7); /* White lily petals */
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            transform-origin: bottom center;
+        }
+
+        .petal:nth-child(1) {
+            transform: rotate(-60deg) translateY(-10px);
+        }
+
+        .petal:nth-child(2) {
+            transform: rotate(-30deg) translateY(-10px);
+        }
+
+        .petal:nth-child(3) {
+            transform: rotate(0deg) translateY(-10px);
+        }
+
+        .petal:nth-child(4) {
+            transform: rotate(30deg) translateY(-10px);
+        }
+
+        .petal:nth-child(5) {
+            transform: rotate(60deg) translateY(-10px);
+        }
+
+        .center {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ff6347, #ff4500);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .message {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Arial', sans-serif;
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .poem {
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            line-height: 1.6;
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="sunrise"></div> <!-- Sunrise Animation -->
+        <div class="cloud"></div> <!-- Cloud Animations -->
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="ground"></div>
+        <div class="river"></div> <!-- River Animation -->
+        <div class="seed"></div>
+        <div class="flower">
+            <div class="stem"></div>
+            <div class="leaves">
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+            <div class="petals">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+            <div class="center"></div>
+        </div>
+    </div>
+    <div class="message">I love you Aditi and Good Morning!</div>
+    <div class="poem">
+        Aditi, you're my heart's true song, <br>
+        In your arms, I feel I belong. <br>
+        Like the rose that grows so high, <br>
+        You lift me up, you make me fly. <br><br>
+        Every morning brings a new dream, <br>
+        With you, my love, life’s like a gleam.
+    </div>
+</body>
+</html>
